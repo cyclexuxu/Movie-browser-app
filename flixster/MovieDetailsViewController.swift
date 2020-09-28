@@ -1,0 +1,60 @@
+//
+//  MovieDetailsViewController.swift
+//  flixster
+//
+//  Created by Xu Yuan on 9/27/20.
+//
+
+import UIKit
+import AlamofireImage
+
+class MovieDetailsViewController: UIViewController {
+    
+    @IBOutlet weak var backdropView: UIImageView!
+    
+    @IBOutlet weak var posterView: UIImageView!
+    
+    @IBOutlet weak var titleLable: UILabel!
+    
+    @IBOutlet weak var synopsisLable: UILabel!
+    
+    var movie: [String:Any]!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        // print(movie["title"])
+        titleLable.text = movie["title"] as? String
+        titleLable.sizeToFit()
+        
+        synopsisLable.text = movie["overview"] as? String
+        synopsisLable.sizeToFit()
+        
+        let baseUrl = "https://image.tmdb.org/t/p/w185"
+        let posterPath = movie["poster_path"] as! String
+        let posterUrl = URL(string: baseUrl + posterPath)
+        
+        posterView.af_setImage(withURL: posterUrl!)
+        
+        
+        let backdropPath = movie["backdrop_path"] as! String
+        let backdropPathUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
+        
+        backdropView.af_setImage(withURL: backdropPathUrl!)
+        
+        
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
